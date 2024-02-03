@@ -1,0 +1,490 @@
+# importing required library
+import pygame
+import sys
+import time
+import random
+from pygame import mixer
+
+mixer.init()
+# Loading the song
+mixer.music.load("RJTH5Z3-epic-inspiration.mp3")
+# Setting the volume
+mixer.music.set_volume(1.2)
+mixer.music.play(10000)
+# activate the pygame library .
+
+pygame.init()
+
+X = 998
+Y = 574
+
+pygame.font.init()
+pygame.font.get_init()
+# create the display surface object
+# of specific dimension..e(X, Y).
+scrn = pygame.display.set_mode((X, Y))
+display_surface = pygame.display.set_mode((998, 574))
+
+# set the pygame window name
+pygame.display.set_caption('The Snake Game')
+font = pygame.font.SysFont(None, 50)
+
+# create a surface object, image is drawn on it.
+imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Snake_Image.png").convert()
+
+color=(24, 153, 132)
+color2=(245, 191, 12)
+
+# Create a start button
+text = font.render('START', True, color)
+start_button = pygame.Rect(90, 290, 200, 50)
+button_color = (185, 245, 66)
+
+# Create a SET button
+text2 = font.render('CREDITS', True, color2)
+credit_button = pygame.Rect(90, 400, 200, 50)
+button_color2 = (17, 120, 24)
+
+# Using blit to copy content from one surface to other
+scrn.blit(imp, (0, 0))
+
+# paint screen one time
+pygame.display.flip()
+
+status = "main_menu"  # Add a variable to keep track of the current page
+
+while status:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            status = False
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            # Check if the mouse click is within the start button boundaries
+            if start_button.collidepoint(event.pos):
+                status = "game_page"  # Change the status to initiate the transition
+            elif credit_button.collidepoint(event.pos):
+                status = "credits_page"
+
+    if status == "main_menu":
+        # Draw the main menu
+        pygame.draw.rect(scrn, button_color, start_button)
+        pygame.draw.rect(scrn, (24, 153, 132), start_button, 2)
+        scrn.blit(text, (130, 300))
+
+        pygame.draw.rect(scrn, button_color2, credit_button)
+        pygame.draw.rect(scrn, (245, 191, 12), credit_button, 2)  # Fix this line
+        scrn.blit(text2, (120, 410))
+
+    elif status == "credits_page":
+        
+        
+        scrn = pygame.display.set_mode((X, Y))
+        display_surface = pygame.display.set_mode((998, 574))
+       
+        
+        white = (255, 255, 255)
+        green = (0, 255, 0)
+        blue = (0, 0, 128)
+        color=(24, 153, 132)    
+            # assigning values to X and Y variable
+        X = 998
+        Y = 574
+             
+            # create the display surface object
+            # of specific dimension..e(X, Y).
+        display_surface = (X, Y)
+        screen = pygame.display.set_mode(display_surface)   
+            # set the pygame window name
+        pygame.display.set_caption('Credits')
+             
+            # create a font object.
+            # 1st parameter is the font file
+            # which is present in pygame.
+            # 2nd parameter is size of the font
+        
+        
+        font = pygame.font.Font('freesansbold.ttf', 32)
+             
+            # create a text surface object,
+            # on which text is drawn on it.
+        text = font.render('    Credits : ', True, green)
+        text2 = font.render('Yi - One of the game creators and the best design creator', True, white)
+        text3 = font.render('Fletcher - The best game attempter while game was in progress', True, white)
+        text4 = font.render('Alex - The Game Creator', True, white)
+        text5 = font.render('Ms. Sachdeva - The person who always thought I was amazing', True, white)
+        text6 = font.render('Jason - Music creator', True, white)
+        text7 = font.render('START', True, color)
+             
+            # create a rectangular object for the
+            # text surface object
+        textRect = text.get_rect()
+        textRect2 = text2.get_rect()
+        textRect3 = text3.get_rect()
+        textRect4 = text4.get_rect()
+        textRect5 = text5.get_rect()
+        textRect6 = text6.get_rect()     
+            # set the center of the rectangular object.
+        textRect.center = (60 , 20)
+        textRect2.center = (450, 60)
+        textRect3.center = (500, 100)
+        textRect4.center = (200, 140)
+        textRect5.center = (500, 180)
+        textRect6.center = (180, 220)
+        
+        
+        
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Snake_Image.png").convert()
+        screen.blit(imp, (0, 0))
+        start2_button = pygame.Rect(90, 290, 200, 50)
+        button_color = (185, 245, 66)
+        pygame.draw.rect(screen, button_color, start2_button)
+        pygame.draw.rect(screen, (24, 153, 132), start2_button, 2)
+        screen.blit(text7, (130, 300))
+        # paint screen one time
+        pygame.display.flip()      
+     
+            # infinite loop
+        while True:
+                    
+            # copying the text surface object
+            # to the display surface object
+            # at the center coordinate.
+            screen.blit(text, textRect)
+            screen.blit(text2, textRect2)
+            screen.blit(text3, textRect3)
+            screen.blit(text4, textRect4)
+            screen.blit(text5, textRect5)
+            screen.blit(text6, textRect6)
+            # iterate over the list of Event objects
+            # that was returned by pygame.event.get() method.
+            for event in pygame.event.get():
+         
+                # if event object type is QUIT
+                # then quitting the pygame
+                # and program both.
+                if event.type == pygame.QUIT:
+         
+                    # deactivates the pygame library
+                    pygame.quit()
+         
+                    # quit the program.
+                    quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    # Check if the mouse click is within the start button boundaries
+                    if start_button.collidepoint(event.pos):
+                        game()
+         
+                # Draws the surface object to the screen.
+                pygame.display.update()
+            
+    elif status == "game_page":
+        game()
+        # Draw your game page here
+        # importing libraries
+    def game():
+        import pygame
+        import time
+        import random
+        from pygame import mixer
+
+        # Starting the mixer
+        mixer.init()
+        # Loading the song
+        mixer.music.load("Game music 1.mp3")
+        # Setting the volume
+        mixer.music.set_volume(1.2)
+        mixer.music.play(10000)        
+
+        X2 = 894
+        Y2 = 628
+
+        screen = pygame.display.set_mode((X2, Y2))
+         
+        # set the pygame window name
+        pygame.display.set_caption('Rules')
+
+         
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Game Rules.png").convert()
+         
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+         
+        # paint screen one time
+        pygame.display.flip()
+
+        time.sleep(10)
+
+
+        X1 = 894
+        Y1 = 628
+
+        screen = pygame.display.set_mode((X1, Y1))
+         
+        # set the pygame window name
+        pygame.display.set_caption('Warning')
+         
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Don't Run Into The Wall.png").convert()
+         
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+         
+        # paint screen one time
+        pygame.display.flip()
+
+        time.sleep(10)
+
+        X3 = 894
+        Y3 = 628
+
+        screen = pygame.display.set_mode((X3, Y3))
+         
+        # set the pygame window name
+        pygame.display.set_caption('CountDown')
+         
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Countdown 3.png").convert()
+         
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+         
+        # paint screen one time
+        pygame.display.flip()
+
+        time.sleep(1)
+
+        X4 = 894
+        Y4 = 628
+
+        screen = pygame.display.set_mode((X4, Y4))
+         
+        # set the pygame window name
+        pygame.display.set_caption('CountDown')
+         
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Countdown 2.png").convert()
+         
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+         
+        # paint screen one time
+        pygame.display.flip()
+
+        time.sleep(1)
+
+        X5 = 894
+        Y5 = 628
+
+        screen = pygame.display.set_mode((X5, Y5))
+         
+        # set the pygame window name
+        pygame.display.set_caption('CountDown')
+         
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Countdown 1.png").convert()
+         
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+         
+        # paint screen one time
+        pygame.display.flip()
+
+        time.sleep(1)    
+
+        X6 = 894
+        Y6 = 628
+
+        screen = pygame.display.set_mode((X3, Y3))
+         
+        # set the pygame window name
+        pygame.display.set_caption('CountDown')
+         
+        # create a surface object, image is drawn on it.
+        imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\Countdown GO!.png").convert()
+         
+        # Using blit to copy content from one surface to other
+        screen.blit(imp, (0, 0))
+         
+        # paint screen one time
+        pygame.display.flip()
+
+        time.sleep(1)
+
+        snake_speed = 25
+
+        # Window size
+        window_x = 720
+        window_y = 480
+
+        X = 548
+        Y = 352
+
+
+        # defining colors
+        black = pygame.Color(0, 0, 0)
+        white = pygame.Color(255, 255, 255)
+        red = pygame.Color(255, 0, 0)
+        green = pygame.Color(0, 255, 0)
+        blue = pygame.Color(0, 0, 255)
+
+        # Initialising pygame
+        pygame.init()
+
+        # Initialise game window
+        Icon = pygame.image.load('''Danger Don't touch.png''')
+        pygame.display.set_caption("Luigi's ghost capturing ")
+        game_window = pygame.display.set_mode((window_x, window_y))
+        pygame.display.set_icon(Icon)
+
+        # FPS (frames per second) controller
+        fps = pygame.time.Clock()
+
+        # defining snake default position
+        snake_position = [120, 70]
+
+        # defining first 4 blocks of snake body
+        snake_body = [[100, 50]]
+        # fruit position
+        fruit_position = [random.randrange(1, (window_x//10)) * 10,
+                                        random.randrange(1, (window_y//10)) * 10]
+
+        fruit_spawn = True
+
+        # setting default snake direction towards
+        # right
+        direction = 'RIGHT'
+        change_to = direction
+
+        # initial score
+        score = 0
+
+        # displaying Score function
+        def show_score(choice, color, font, size):
+
+                # creating font object score_font
+                score_font = pygame.font.SysFont(font, size)
+
+                # create the display surface object
+                # score_surface
+                score_surface = score_font.render('Ghost Captured : ' + str(score), True, color)
+
+                # create a rectangular object for the text
+                # surface object
+                score_rect = score_surface.get_rect()
+
+                # displaying text
+                game_window.blit(score_surface, score_rect)
+        # game over function
+        def game_over():
+                time.sleep(5)
+
+                scrn = pygame.display.set_mode((X, Y))
+                imp = pygame.image.load("C:\\Users\\Alexander\\Desktop\\School\\Coding class\\Python\\New folder\\Creating very own game basics\\Python Game\\King Boo GAME OVER.png").convert()
+                scrn.blit(imp, (0, 0))
+                pygame.display.flip()
+
+                mixer.music.load("Game Over 1.mp3")
+                mixer.music.set_volume(19.9)
+                mixer.music.play()
+
+                time.sleep(21)
+                print("Your score is: " + str(score))
+                pygame.quit()
+                quit()
+                
+        # Main Function
+        while True:
+            
+            
+               
+                # handling key events
+                for event in pygame.event.get():
+                        if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.K_UP:
+                                        change_to = 'UP'
+                                if event.key == pygame.K_DOWN:
+                                        change_to = 'DOWN'
+                                if event.key == pygame.K_LEFT:
+                                        change_to = 'LEFT'
+                                if event.key == pygame.K_RIGHT:
+                                        change_to = 'RIGHT'
+                
+                # If two keys pressed simultaneously
+                # we don't want snake to move into two
+                # directions simultaneously
+                if change_to == 'UP' and direction != 'DOWN':
+                        direction = 'UP'
+                if change_to == 'DOWN' and direction != 'UP':
+                        direction = 'DOWN'
+                if change_to == 'LEFT' and direction != 'RIGHT':
+                        direction = 'LEFT'
+                if change_to == 'RIGHT' and direction != 'LEFT':
+                        direction = 'RIGHT'
+
+                # Moving the snake
+                if direction == 'UP':
+                        snake_position[1] -= 10
+                if direction == 'DOWN':
+                        snake_position[1] += 10
+                if direction == 'LEFT':
+                        snake_position[0] -= 10
+                if direction == 'RIGHT':
+                        snake_position[0] += 10
+
+                
+                # Snake body growing mechanism
+                # if fruits and snakes collide then scores
+                # will be incremented by 10
+                snake_body.insert(0, list(snake_position))
+                if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
+                        score += 1
+                        fruit_spawn = False
+                else:
+                        snake_body.pop()
+
+                if not fruit_spawn:
+                        fruit_position = [random.randrange(1, (window_x//10)) * 10,
+                                                        random.randrange(1, (window_y//10)) * 10]
+
+                fruit_spawn = True
+                game_window.fill(black)
+
+                for pos in snake_body:
+                        pygame.draw.rect(game_window, green,
+                                                        pygame.Rect(pos[0], pos[1], 9, 9))
+                pygame.draw.rect(game_window, red, pygame.Rect(
+                        fruit_position[0], fruit_position[1], 7, 7))
+                
+                # Game Over conditions
+                if snake_position[0] < 0 or snake_position[0] > window_x-10:
+                        game_over()
+                if snake_position[1] < 0 or snake_position[1] > window_y-10:
+                        game_over()
+
+                #Touching the snake body
+                #for block in snake_body[1:]:
+                #	if snake_position[0] == block[0] and snake_position[1] == block[1]:
+                #		game_over()
+
+                # displaying score continuously
+                show_score(1, white, 'times new roman', 20)
+
+                # Refresh game screen
+                pygame.display.update()
+
+                # Frame Per Second /Refresh Rate
+                fps.tick(snake_speed)
+                
+
+        # fills the screen with specified colour
+
+
+
+    pygame.display.flip()
+    
+
+
+
+
+pygame.quit()
+sys.exit()
